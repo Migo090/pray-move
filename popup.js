@@ -3,6 +3,7 @@ let countdownInterval;
 
 async function init() {
   const data = await api.storage.local.get(['timings', 'locationName', 'moveEnabled', 'interval']);
+  
   if (data.locationName) document.getElementById('location-display').innerText = data.locationName;
   if (data.interval) document.getElementById('move-interval').value = data.interval;
   document.getElementById('enable-move').checked = data.moveEnabled !== false;
@@ -10,6 +11,8 @@ async function init() {
   if (data.timings) {
     updatePrayerUI(data.timings);
     startCountdown(data.timings);
+  } else {
+    fetchLocationAndPrayers();
   }
 }
 
@@ -17,7 +20,7 @@ function format12Hour(time24) {
   let [hours, minutes] = time24.split(':');
   hours = parseInt(hours);
   const ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12 || 12; // Convert 0 to 12 for 12 AM
+  hours = hours % 12 || 12;
   return `${hours}:${minutes} ${ampm}`;
 }
 
@@ -50,7 +53,8 @@ function startCountdown(timings) {
     });
 
     document.querySelectorAll('.salah-row').forEach(r => r.classList.remove('highlighted'));
-    document.getElementById(`row-${next}`).classList.add('highlighted');
+    const nextRow = document.getElementById(`row-${next}`);
+    if(nextRow) nextRow.classList.add('highlighted');
 
     const hh = Math.floor(minDiff / 3600000);
     const mm = Math.floor((minDiff % 3600000) / 60000);
@@ -62,7 +66,30 @@ function startCountdown(timings) {
   }, 1000);
 }
 
-// Navigation and Save logic...
+async function fetchLocationAndPrayers() {
+  const statusEl = document.getElementById('location-display');
+  statusEl.innerText = "Locating...";
+
+  navigator.geolocation.getCurrentPosition(async (position) => {
+    const { latitude, longitude } = position.coords;
+    try {
+      const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=2`);
+      const result = await response.json();
+      const timings = result.data.timings;
+      
+      const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+      const geoData = await geoRes.json();
+      const city = geoData.address.city || geoData.address.town || geoData.address.suburb || "My Location";
+
+      await api.storage.local.set({ timings, locationName: city });
+
+      statusEl.innerText = city;
+      updatePrayerUI(timings);
+      startCountdown(timings);
+    } catch (e) { statusEl.innerText = "Fetch Error"; }
+  }, () => { statusEl.innerText = "Location Denied"; });
+}
+
 document.getElementById('move-page-btn').onclick = () => document.getElementById('page-container').classList.add('slide-active');
 document.getElementById('back-btn').onclick = () => document.getElementById('page-container').classList.remove('slide-active');
 
