@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="window-clipper">
+    <div class="container" id="page-container">
+      <div id="main-view" class="page">
+        <header class="split-header">
+          <div class="header-section active">
+            <i class="fa-solid fa-mosque"></i>
+            <span id="location-display">Salah</span>
+            <i class="fa-solid fa-location-dot" id="detect-loc-btn"></i>
+          </div>
+          <div class="header-divider"></div>
+          <div id="move-page-btn" class="header-section"><i class="fa-solid fa-person-running"></i><span>Flow</span></div>
+        </header>
+        <div class="prayer-list" id="list">
+          <div class="salah-row" id="row-Fajr"><span class="time">--:--</span><span class="name">الفجر</span></div>
+          <div class="salah-row" id="row-Dhuhr"><span class="time">--:--</span><span class="name">الظهر</span></div>
+          <div class="salah-row" id="row-Asr"><span class="time">--:--</span><span class="name">العصر</span></div>
+          <div class="salah-row" id="row-Maghrib"><span class="time">--:--</span><span class="name">المغرب</span></div>
+          <div class="salah-row" id="row-Isha"><span class="time">--:--</span><span class="name">العشاء</span></div>
+        </div>
+        <div class="countdown-container">
+          <div class="timer-display"><span id="h">00</span><small>h</small><span id="m">00</span><small>m</small><span id="s">00</span><small>s</small></div>
+        </div>
+      </div>
+      <div id="move-view" class="page">
+        <header class="settings-header">
+          <button id="back-btn" class="icon-btn"><i class="fa-solid fa-chevron-left"></i></button>
+          <h2>Flow Settings</h2>
+        </header>
+        <div class="settings-content">
+          <div class="setting-group">
+            <label>Enable Reminders</label>
+            <input type="checkbox" id="enable-move" checked>
+          </div>
+          <div class="setting-group" id="int-box">
+            <label>Interval (Mins)</label>
+            <input type="number" id="move-interval" value="30">
+          </div>
+          <button id="save-move-settings" class="primary-btn">Save Settings</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
