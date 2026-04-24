@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+  <!-- Left minaret -->
+  <rect x="0" y="3" width="2" height="13" fill="#00E5FF"/>
+  <!-- Left minaret cap -->
+  <rect x="0" y="1.5" width="2" height="2" rx="1" fill="#00E5FF"/>
+  <!-- Left finial -->
+  <rect x="0.6" y="0" width="0.8" height="1.8" fill="#00E5FF"/>
+
+  <!-- Right minaret -->
+  <rect x="14" y="3" width="2" height="13" fill="#00E5FF"/>
+  <!-- Right minaret cap -->
+  <rect x="14" y="1.5" width="2" height="2" rx="1" fill="#00E5FF"/>
+  <!-- Right finial -->
+  <rect x="14.6" y="0" width="0.8" height="1.8" fill="#00E5FF"/>
+
+  <!-- Central body -->
+  <rect x="2" y="9" width="12" height="7" fill="#00E5FF"/>
+
+  <!-- Central dome -->
+  <path d="M3.5,9 Q3.5,3.5 8,3.5 Q12.5,3.5 12.5,9 Z" fill="#00E5FF"/>
+
+  <!-- Dome finial -->
+  <rect x="7.4" y="2" width="1.2" height="1.8" fill="#00E5FF"/>
+
+  <!-- Crescent: full circle minus a offset circle -->
+  <path d="M8,0.2 A1.1,1.1 0 1,1 8,2.4 A0.85,0.85 0 1,0 8,0.2 Z" fill="#00E5FF"/>
+
+  <!-- Door arch cutout (transparent hole) -->
+  <path d="M6.5,16 L6.5,13 Q6.5,11.2 8,11.2 Q9.5,11.2 9.5,13 L9.5,16 Z" fill="black"/>
+
+  <!-- Left window cutout -->
+  <rect x="3.2" y="10.5" width="1.8" height="2.2" rx="0.9" fill="black"/>
+
+  <!-- Right window cutout -->
+  <rect x="11" y="10.5" width="1.8" height="2.2" rx="0.9" fill="black"/>
+</svg>
